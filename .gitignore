@@ -14,3 +14,6 @@ Cargo.lock
 # Ignore build artifacts
 build/
 *.rmeta
+
+# build .rs without cargo 
+main
