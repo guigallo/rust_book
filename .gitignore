@@ -1,0 +1,16 @@
+# Ignore compiled binary files
+target/
+
+# Ignore editor-specific files and folders
+.vscode/
+.idea/
+*.swp
+*~
+*.bak
+
+# Ignore cargo lock file, which specifies dependency versions
+Cargo.lock
+
+# Ignore build artifacts
+build/
+*.rmeta
