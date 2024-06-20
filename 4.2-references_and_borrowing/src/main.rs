@@ -4,6 +4,7 @@ fn main() {
     mutable_references();
     mutable_reference_restrictions();
     dangling_references();
+    the_rules_of_references();
 }
 
 fn references() {
@@ -117,6 +118,40 @@ fn mutable_reference_restrictions() {
 }
 
 fn dangling_references() {
-    todo!()
-    // checkpoint
+    // Is a pointer that references a location in memory that may have been
+    // given to someone else
+    
+    // In languages with pointer, it's easy to erroneuosly create a dongling
+    // pointer by freeing some memory while preserving a pointer to that memory
+
+    // Rust compiler garanttes that references will never be dangling referens:
+    // if you hve a reference to some data, the compiler will ensure that the
+    // data will not go out of scope before the reference to the data does
+
+    fn main() {
+        #[allow(unused_variables)]
+        let reference_to_nothing = dangle();
+        #[allow(unused_variables)]
+        let reference_to_something = no_dangle();
+    }
+    
+    // this function's return type contains a borrowed value, but there is no value
+    // for it to be borrowed from.
+    fn dangle() -> &String { // dangle returns a reference to a String
+        let s = String::from("hello"); // s is a new String
+
+        &s // we returna reference to the String, s
+    } // Here, s goes out of scope, and is dropped. Its memory goes away. Danger!
+
+    fn no_dangle() -> String {
+        let s = String::from("hello");
+        s
+    }
 }
+
+fn the_rules_of_references() {
+    // - At any given time, you can have either one mutable reference or any
+    // number of immutable references.
+    // - References must always be valid.
+}
+
